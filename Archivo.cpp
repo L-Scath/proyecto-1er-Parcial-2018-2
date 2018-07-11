@@ -22,43 +22,85 @@ void Archivo::escribir(){
     tamano= sizeof(relleno);
 }
 
-void Archivo::leer(){	
-	ifstream archiv(titulo.c_str(), ios::in);	
-	archiv.getline(relleno2, sizeof(relleno2));	
-	archiv.close();	
-}
 
+
+
+//---------------------------leer va aqui---------------------------------///
 void Archivo::imprimir(){
 	int maxCarac=relleno.size();
-	cout<<"cantidad maxima de caracteres es: "<<maxCarac<<endl;
+	//cout<<"cantidad maxima de caracteres es: "<<maxCarac<<endl;
 	int num=0;
 	for(int i=0;i<maxCarac;i++){		
 		if(i%4==0) {
-			num++;
-			cout<<relleno.c_str()+i<<" "<<num<<endl;
+			num++;		
 		}		
 	}	
 
-	int parasumar [num][4];	
-	int auxnum=0;	
-	char charseparad;
-	
+	char **charcortados = new char*[num];
+		for(int i=0;i<num;i++){		
+			charcortados[i]=new char;
+		}	
+		
+	int auxnum=0;		
+	char separador;
+		
 		for(int i=0;i<maxCarac;i++){		
 			if(i%4==0) {
 				for(int k=0;k<4;k++){
-					charseparad=relleno[i+k];
-					parasumar[auxnum][k]=(charseparad);
+					separador=relleno[i+k];
+					charcortados[auxnum][k]=(separador);
+					if(i+k>=maxCarac){
+						charcortados[auxnum][k]=NULL;
+					}
 				}
 				auxnum++;
 			}						
 		}
-	
-			for(int i=0;i<num;i++) {
-				for(int j=0;j<4;j++){				
-					cout<<parasumar[i][j]<<"      ";						
-				}			
-					cout<<endl;
-			}
+		
+		
+//-----------------------------esto se quitA-------------------//
+			int x;
+			int *bytes=new int[8];
+			string salida="";
+			char* nose=new char;
 			
+			for(int i=0;i<num;i++) {
+				for(int j=0;j<4;j++){
+						x=charcortados[i][j];				
+					cout<<charcortados[i][j]<<"("<<x<<")"<<" ";	
+					///
+					for(int i=0;i<8;i++){
+						if(x%2==1){
+							x=(x-1)/2;
+							bytes[i]=1;
+						}else{
+					x=(x)/2;
+					bytes[i]=0;
+						}
+					}
+					
+
+					
+					for(int i=0;i<8;i++){
+   							sprintf(nose, "%d", bytes[i]);
+								
+						salida=salida + nose;
+						}
+						salida=salida + "\n";
+					///								
+				}			
+					cout<<endl<<endl<<salida<<endl;
+			}			
+//-----------------------------------------------------------------//			
+
+
+
+
+/*for(int j=7;j>=0;j--){
+		cout<<vector[j];
+}*/
+	
+///////--------------------------------------------------------------////////////////
+
 	
 }

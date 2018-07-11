@@ -19,7 +19,8 @@ class Archivo
 	public:
 		Archivo();
 		void escribir();
-		void leer();
+	//	void leer();
+	//	void leer(char* texto);
 		void imprimir();
 	
 	protected:
