@@ -60,16 +60,19 @@ void Archivo::imprimir(){
 		
 //-----------------------------esto se quitA-------------------//
 			int x;
+			int unsigned sad[num];
+			string xd[5];
 			int *bytes=new int[8];
 			string salida="";
 			char* nose=new char;
 			
 			for(int i=0;i<num;i++) {
+				
 				for(int j=0;j<4;j++){
 						x=charcortados[i][j];				
 					cout<<charcortados[i][j]<<"("<<x<<")"<<" ";	
 					///
-					for(int i=0;i<8;i++){
+					for(int i=7;i>=0;i--){
 						if(x%2==1){
 							x=(x-1)/2;
 							bytes[i]=1;
@@ -79,17 +82,21 @@ void Archivo::imprimir(){
 						}
 					}
 					
-
+					salida="";
 					
 					for(int i=0;i<8;i++){
-   							sprintf(nose, "%d", bytes[i]);
-								
-						salida=salida + nose;
-						}
-						salida=salida + "\n";
+   							sprintf(nose,"%d", bytes[i]);								
+						salida=salida+nose;											
+					}
+						xd[j]=salida;
+						cout<<xd[j];				
+						strcpy(nose,"");
 					///								
-				}			
-					cout<<endl<<endl<<salida<<endl;
+				}
+					xd[4]=xd[3]+xd[2]+xd[1]+xd[0];
+					//cout<<xd[4];					
+					sad[num]=atoi(xd[4].c_str());
+					cout<<endl<<endl<<sad[num]<<endl;
 			}			
 //-----------------------------------------------------------------//			
 
@@ -104,3 +111,4 @@ void Archivo::imprimir(){
 
 	
 }
+
