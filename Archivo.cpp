@@ -136,11 +136,9 @@ ifstream vBeta;
 					for(int k=0;k<31;k++){
 					ye[k]=equis[p+acum];	
 					sprintf(ye, "%d", bytes[num]);
-					
-				}
+					acum++;
+				}				
 				
-				acum++;					
-
 					cout<<"    ["<<acum<<"]";
 					cout<<vbytes[num]<<endl;
 				}
