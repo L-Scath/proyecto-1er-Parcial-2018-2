@@ -1,6 +1,10 @@
+#include <iostream>
+#include<stdlib.h>
+#include<conio.h>
 #include "Archivo.h"
-#include <string.h>
+#include<string.h>
 
+using namespace std;
 Archivo::Archivo(){
 	tamano=0;
 	relleno2=new char;
@@ -9,7 +13,7 @@ Archivo::Archivo(){
 }
 
 void Archivo::escribir(){
-	cout << "Ingresa el nombre del archivo a crear(sin el .txt): ";
+	/*cout << "Ingresa el nombre del archivo a crear(sin el .txt): ";
         cin.sync();
         getline(cin, titulo);
         cout << "Ingresa el contenido del archivo: ";
@@ -19,7 +23,8 @@ void Archivo::escribir(){
         archiv << relleno << endl;
         archiv.close();
     cout << "El archivo ha sido creado correctamente" << endl;
-    tamano= sizeof(relleno);
+    tamano= sizeof(relleno);*/
+  
 }
 
 
@@ -27,18 +32,46 @@ void Archivo::escribir(){
 
 //---------------------------leer va aqui---------------------------------///
 void Archivo::imprimir(){
-	int maxCarac=relleno.size();
+
 	//cout<<"cantidad maxima de caracteres es: "<<maxCarac<<endl;
-	int num=0;
-	for(int i=0;i<maxCarac;i++){		
+	
+ifstream vBeta;
+	string otracadena="";
+     int sum=0;
+     int x;
+     
+     vBeta.open("PRUEBA.txt",ios::in);
+   
+
+/*if(!arreglaDO.is_open())
+      arreglaDO.open("PRUEBA.txt", ios::in);
+      */
+      
+      if(vBeta.fail()){
+      	cout << "no se pudo abrir el archivo....";
+      	exit(1);
+      	
+	  }
+      while(!vBeta.eof()){
+      	
+      	getline(vBeta, title);
+    	otracadena=otracadena+title;
+	  }
+	  title=otracadena;
+	  maxCarac=title.size();
+	  vBeta.close();
+	  
+	  int num=0;
+	  
+	  	for(int i=0;i<maxCarac;i++){		
 		if(i%4==0) {
 			num++;		
 		}		
-	}	
-
-	char **charcortados = new char*[num];
+	}
+      	char **charcortados = new char*[num];
 		for(int i=0;i<num;i++){		
 			charcortados[i]=new char;
+			
 		}	
 		
 	int auxnum=0;		
@@ -47,7 +80,7 @@ void Archivo::imprimir(){
 		for(int i=0;i<maxCarac;i++){		
 			if(i%4==0) {
 				for(int k=0;k<4;k++){
-					separador=relleno[i+k];
+					separador=title[i+k];
 					charcortados[auxnum][k]=(separador);
 					if(i+k>=maxCarac){
 						charcortados[auxnum][k]=NULL;
@@ -59,20 +92,17 @@ void Archivo::imprimir(){
 		
 		
 //-----------------------------esto se quitA-------------------//
-			int x;
-			int unsigned sad[num];
-			string xd[5];
+	
 			int *bytes=new int[8];
 			string salida="";
 			char* nose=new char;
 			
 			for(int i=0;i<num;i++) {
-				
 				for(int j=0;j<4;j++){
 						x=charcortados[i][j];				
-					cout<<charcortados[i][j]<<"("<<x<<")"<<" ";	
+					cout<<charcortados[i][j]/*<<"("<<x<<")"<<" "*/;	
 					///
-					for(int i=7;i>=0;i--){
+					for(int i=0;i<8;i++){
 						if(x%2==1){
 							x=(x-1)/2;
 							bytes[i]=1;
@@ -82,22 +112,40 @@ void Archivo::imprimir(){
 						}
 					}
 					
-					salida="";
+
 					
 					for(int i=0;i<8;i++){
-   							sprintf(nose,"%d", bytes[i]);								
-						salida=salida+nose;											
-					}
-						xd[j]=salida;
-						cout<<xd[j];				
-						strcpy(nose,"");
+   							sprintf(nose, "%d", bytes[i]);
+								
+						salida=salida + nose;
+						}
+						//salida=salida + "\n";
 					///								
+				}			
+				
+			}		
+			int unsigned *vbytes=new unsigned int[num];
+			char *equis=new char;
+			char ye[31];
+			
+			int acum=0;			
+					
+			strcpy(equis,salida.c_str());		
+			for(int p=0;p<salida.length();p++){							
+				if(p%31==0){
+					for(int k=0;k<31;k++){
+					ye[k]=equis[p+acum];	
+					sprintf(ye, "%d", bytes[num]);
+					
 				}
-					xd[4]=xd[3]+xd[2]+xd[1]+xd[0];
-					//cout<<xd[4];					
-					sad[num]=atoi(xd[4].c_str());
-					cout<<endl<<endl<<sad[num]<<endl;
-			}			
+				
+				acum++;					
+
+					cout<<"    ["<<acum<<"]";
+					cout<<vbytes[num]<<endl;
+				}
+				
+			}
 //-----------------------------------------------------------------//			
 
 
@@ -109,6 +157,10 @@ void Archivo::imprimir(){
 	
 ///////--------------------------------------------------------------////////////////
 
+
+	
+	  
+	
+
 	
 }
-

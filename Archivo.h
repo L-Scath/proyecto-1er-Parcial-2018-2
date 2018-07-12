@@ -16,6 +16,8 @@ class Archivo
 	char* relleno2;
 	string titulo;
 	string relleno;
+	string title;
+	int maxCarac;
 	public:
 		Archivo();
 		void escribir();
